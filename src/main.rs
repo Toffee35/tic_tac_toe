@@ -1,29 +1,26 @@
+mod cell;
+mod check;
 mod display;
+mod places;
 
+use cell::Cell;
+use check::check_winner;
 use display::display_board;
-
-use std::fmt::Display;
-
-#[derive(Clone, Copy)]
-enum Cell {
-    Empty,
-    Cross,
-    Zero,
-}
-
-impl Display for Cell {
-    fn display() {}
-}
+use places::player_places;
 
 fn play_game() {
     let mut board: [[Cell; 3]; 3] = [[Cell::Empty; 3]; 3];
 
-    loop {
-        // hod
+    let mut is_over: bool = false;
 
+    while !is_over {
         display_board(board);
 
-        // parse_move
+        player_places(|x: u8, y: u8| {
+            board[x as usize][y as usize] = Cell::Cross;
+        });
+
+        is_over = check_winner(board);
     }
 }
 
