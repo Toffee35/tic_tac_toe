@@ -1,6 +1,8 @@
 use super::Cell;
 
 pub fn display_board(board: [[Cell; 3]; 3]) {
+    print!("\x1B[2J\x1B[1;1H");
+
     println!("  a b c");
 
     let mut string_number: u8 = 1;

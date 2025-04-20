@@ -16,9 +16,11 @@ fn play_game() {
     while !is_over {
         display_board(board);
 
-        player_places(|x: u8, y: u8| {
-            board[x as usize][y as usize] = Cell::Cross;
-        });
+        player_places()
+            .map(|(x, y)| {
+                board[x as usize][y as usize] = Cell::Cross;
+            })
+            .unwrap();
 
         is_over = check_winner(board);
     }
