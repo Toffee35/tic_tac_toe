@@ -18,8 +18,15 @@ fn play_game() {
 
         player_places()
             .map(|(x, y)| {
-                board[x as usize][y as usize] = Cell::Cross;
+                if board[x as usize][y as usize] == Cell::Empty {
+                    board[x as usize][y as usize] = Cell::Cross;
+
+                    Ok(())
+                } else {
+                    Err(())
+                }
             })
+            .unwrap()
             .unwrap();
 
         is_over = check_winner(board);
