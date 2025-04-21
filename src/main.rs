@@ -17,16 +17,12 @@ fn play_game() {
         display_board(board);
 
         player_places()
-            .map(|(x, y)| {
+            .map(|(x, y): (u8, u8)| {
                 if board[x as usize][y as usize] == Cell::Empty {
                     board[x as usize][y as usize] = Cell::Cross;
-
-                    Ok(())
                 } else {
-                    Err(())
                 }
             })
-            .unwrap()
             .unwrap();
 
         is_over = check_winner(board);
